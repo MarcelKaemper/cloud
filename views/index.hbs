@@ -7,3 +7,16 @@ Welcome {{user}}
 	<input type="file" name="filetoupload"><br>
 	<input type="submit">
 </form>
+<br>
+<h2>Files</h2>
+<ul>
+{{#each files}}
+			<form method="post">
+				<li>{{this}}
+					<input type="hidden" name="name" value={{this}}>
+					<input formaction="download" type="submit" value="Download">
+					<input formaction="delete" type="submit" value="Delete">
+				</li>
+			</form>
+{{/each}}
+</ul>
