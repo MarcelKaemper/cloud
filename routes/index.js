@@ -1,6 +1,7 @@
 var fs = require('fs');
 var formidable = require('formidable');
 var mv = require('mv');
+var path = require('path');
 
 var express = require('express');
 var router = express.Router();
@@ -18,9 +19,9 @@ router.post("/upload", (req,res,next) => {
 	var form = new formidable.IncomingForm();
 	form.parse(req, function (err, fields, files) {
 		let oldPath = files.filetoupload.path;
-		let path = __dirname+"/"+files.filetoupload.name;
-		mv(oldPath, path, (err) => {
-			if (err) throw err;
+		let newPath = path.resolve(__dirname,"../data/"+files.filetoupload.name);
+		mv(oldPath, newPath, (err) => {
+			if (err) throw (err);
 			res.redirect('/');
 		});
 	});
